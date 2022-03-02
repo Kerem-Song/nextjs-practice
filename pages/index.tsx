@@ -1,9 +1,9 @@
-import { useState } from "react"
-import NavBar from "../components/NavBar/NavBar"
+import Seo from "../components/Seo"
 
 export default function Home() {
   return (
     <div>
+      <Seo title="home"/>
       <h1>Hello</h1>
     </div>
   )
