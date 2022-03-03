@@ -1,3 +1,4 @@
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useEffect, useState } from 'react';
 import Seo from '../components/Seo';
 
@@ -7,21 +8,15 @@ interface Movies {
   poster_path: string;
 }
 
-export default function Home() {
-  const [movies, setMovies] = useState<Movies[]>([]);
-  useEffect(() => {
-    (async () => {
-      const { results } = await (await fetch(`/api/movies`)).json();
-      console.log(results);
-      setMovies(results);
-    })();
-  }, []);
+export default function Home({
+  results,
+}: InferGetServerSidePropsType<GetServerSideProps>) {
   return (
     <div>
       <div className="container">
         <Seo title="home" />
-        {!movies && <h4>Loading...</h4>}
-        {movies?.map((movie) => (
+        {!results && <h4>Loading...</h4>}
+        {results?.map((movie: Movies) => (
           <div key={movie.id}>
             <div className="movie" key={movie.id}>
               <img
@@ -55,4 +50,15 @@ export default function Home() {
       </div>
     </div>
   );
+}
+
+export async function getServerSideProps({}: GetServerSideProps) {
+  const { results } = await (
+    await fetch(`http://localhost:3000/api/movies`)
+  ).json();
+  return {
+    props: {
+      results,
+    },
+  };
 }
