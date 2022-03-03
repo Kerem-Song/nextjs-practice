@@ -1,10 +1,10 @@
-import Seo from "../components/Seo";
+import Seo from '../components/Seo';
 
 export default function Potato() {
   return (
     <div>
-      <Seo title="about"/>
+      <Seo title="about" />
       <h1>About us</h1>
     </div>
-  ) 
+  );
 }
