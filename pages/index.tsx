@@ -12,16 +12,8 @@ export default function Home({
   results,
 }: InferGetServerSidePropsType<GetServerSideProps>) {
   const router = useRouter();
-  const handleMovieClick = (id: number, original_title: string) => {
-    router.push(
-      {
-        pathname: `/movies/${id}`,
-        query: {
-          title: original_title,
-        },
-      },
-      `/movies/${id}`,
-    );
+  const handleMovieClick = (id: number, title: string) => {
+    router.push(`/movies/${title}/${id}`);
   };
 
   return (
